@@ -1,7 +1,7 @@
 name: Showdown
-main: no.runsafe.showdown.Plugin
+main: nl.naxanria.showdown.Plugin
 version: 1.0.@BUILD@
-authors: []
+authors: [Naxanria]
 depend: []
 description:
 commands:
