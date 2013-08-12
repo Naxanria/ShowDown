@@ -12,7 +12,7 @@ import java.util.List;
 public class PlayerHandler implements IConfigurationChanged
 {
 
-	public void addPlayers(ArrayList<RunsafePlayer> players)
+	public void addPlayers(List<RunsafePlayer> players)
 	{
 		for(RunsafePlayer player : players)
 			addPlayer(player);
@@ -87,12 +87,31 @@ public class PlayerHandler implements IConfigurationChanged
 	public void OnConfigurationChanged(IConfiguration configuration)
 	{
 		minSize = configuration.getConfigValueAsInt("min-players");
+		world = configuration.getConfigValueAsString("world");
+		startLocation = new RunsafeLocation(
+				RunsafeServer.Instance.getWorld(world),
+				configuration.getConfigValueAsDouble("start.x"),
+				configuration.getConfigValueAsDouble("start.y"),
+				configuration.getConfigValueAsDouble("start.z")
+			);
+		endLocation = new RunsafeLocation(
+				RunsafeServer.Instance.getWorld(world),
+				configuration.getConfigValueAsDouble("end.x"),
+				configuration.getConfigValueAsDouble("end.y"),
+				configuration.getConfigValueAsDouble("end.z")
+			);
 
+	}
+	public void clear()
+	{
+		inGame.clear();
 	}
 
 	private ArrayList<String> inGame = new ArrayList<String>();
 	private RunsafeLocation startLocation;
 	private RunsafeLocation endLocation;
+	private String world = "showdown";
 	private int minSize = 2;
+
 
 }

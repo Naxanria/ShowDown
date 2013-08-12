@@ -5,6 +5,6 @@ authors: [Naxanria]
 depend: []
 description:
 commands:
-  something:
+  showdown:
     description:
-    aliases: []
+    aliases: [sd]

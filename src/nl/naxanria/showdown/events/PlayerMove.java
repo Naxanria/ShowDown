@@ -20,20 +20,26 @@ public class PlayerMove implements IPlayerMove
 	@Override
 	public boolean OnPlayerMove(RunsafePlayer player, RunsafeLocation from, RunsafeLocation to) {
 
-		if (playerHandler.isInGame(player) && !arenaHandler.isPositionInArena(to))
+		if (playerHandler.isInGame(player))
 		{
-			playerHandler.removePlayer(player);
-			player.teleport(playerHandler.getEndLocation());
-			if(playerHandler.getAmountPlayers() == 1)
-				core.winner();
+			player.setSaturation(20f);
+			player.setFoodLevel(20);
+			if(!arenaHandler.isPositionInArena(to))
+			{
+				playerHandler.removePlayer(player);
+				player.teleport(playerHandler.getEndLocation());
+				if(playerHandler.getAmountPlayers() == 1)
+					core.winner();
 
-		}
-		else if(!playerHandler.isInGame(player) && arenaHandler.isPositionInArena(to))
-		{
-			player.teleport(playerHandler.getEndLocation());
+			}
+			else if(!playerHandler.isInGame(player) && arenaHandler.isPositionInArena(to))
+			{
+				if(!player.isCreative())
+					player.teleport(playerHandler.getEndLocation());
+			}
 		}
 
-		return false;
+		return true;
 	}
 
 	private final Core core;

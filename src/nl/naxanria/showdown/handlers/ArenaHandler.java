@@ -1,6 +1,6 @@
 package nl.naxanria.showdown.handlers;
 
-import javafx.geometry.BoundingBox;
+import nl.naxanria.showdown.BoundingBox;
 import nl.naxanria.showdown.Util;
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
@@ -12,7 +12,7 @@ public class ArenaHandler implements IConfigurationChanged
 	public boolean isPositionInArena(RunsafeLocation location)
 	{
 		return boundingBox != null && location.getWorld().getName().equalsIgnoreCase(world)
-			&& Util.isPointInBoundingBox(location, boundingBox);
+				&& boundingBox.contains(location);
 	}
 
 	public void setBoundingBox(BoundingBox boundingBox)

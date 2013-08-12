@@ -2,8 +2,7 @@ package nl.naxanria.showdown.command;
 
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.bukkit.selections.Selection;
-import javafx.geometry.BoundingBox;
-import nl.naxanria.showdown.handlers.ArenaHandler;
+import nl.naxanria.showdown.BoundingBox;
 import nl.naxanria.showdown.handlers.LobbyHandler;
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.command.player.PlayerCommand;
@@ -31,7 +30,7 @@ public class CommandSetLobby extends PlayerCommand
 
 		Selection selection = worldEdit.getSelection(executor.getRawPlayer());
 		if(selection == null)
-			return "Make a selection first!";
+			return "&cMake a selection first!";
 
 		double x = selection.getMinimumPoint().getX();
 		double y = selection.getMinimumPoint().getY();
@@ -41,7 +40,7 @@ public class CommandSetLobby extends PlayerCommand
 		double h = selection.getHeight();
 
 		lobbyHandler.setLobby(
-				new BoundingBox(x, y, z, w, l, h)
+				new BoundingBox(x, y, z, w, h, l)
 		);
 		lobbyHandler.setWorld(executor.getWorld().getName());
 
@@ -54,7 +53,7 @@ public class CommandSetLobby extends PlayerCommand
 		configuration.setConfigValue("lobby.world", executor.getWorld().getName());
 		configuration.save();
 
-		return "&cSaved the arena";
+		return "&3Saved the lobby";
 	}
 
 	public final LobbyHandler lobbyHandler;

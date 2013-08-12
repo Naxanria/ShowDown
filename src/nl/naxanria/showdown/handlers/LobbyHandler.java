@@ -1,8 +1,8 @@
 package nl.naxanria.showdown.handlers;
 
-import javafx.geometry.BoundingBox;
-import nl.naxanria.showdown.Util;
+import nl.naxanria.showdown.BoundingBox;
 import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.RunsafeServer;
@@ -15,6 +15,10 @@ import java.util.List;
 public class LobbyHandler implements IConfigurationChanged
 {
 
+	public LobbyHandler(IOutput console)
+	{
+		this.console = console;
+	}
 
 	public List<RunsafePlayer> getLobbyPlayers()
 	{
@@ -25,8 +29,9 @@ public class LobbyHandler implements IConfigurationChanged
 		List<RunsafePlayer> allPlayers = runsafeWorld.getPlayers();
 		List<RunsafePlayer> lobbyPlayers = new ArrayList<RunsafePlayer>();
 		for (RunsafePlayer player : allPlayers)
-			if (Util.isPointInBoundingBox(player.getLocation(), lobby))
-					lobbyPlayers.add(player);
+			if (lobby.contains(player.getLocation()))
+				lobbyPlayers.add(player);
+
 
 		return lobbyPlayers;
 	}
@@ -59,7 +64,7 @@ public class LobbyHandler implements IConfigurationChanged
 	{
 
 		if(lobbySpawn == null)
-			return Util.getMiddleLocation(lobby, RunsafeServer.Instance.getWorld(world));
+			return lobby.middle(RunsafeServer.Instance.getWorld(world));
 
 		return lobbySpawn;
 	}
@@ -72,5 +77,6 @@ public class LobbyHandler implements IConfigurationChanged
 	private BoundingBox lobby;
 	private String world = "showdown";
 	private RunsafeLocation lobbySpawn;
+	private final IOutput console;
 
 }

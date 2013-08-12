@@ -1,17 +1,12 @@
 package nl.naxanria.showdown;
 
-import nl.naxanria.showdown.command.CommandSetArena;
-import nl.naxanria.showdown.command.CommandSetLobby;
-import nl.naxanria.showdown.events.PlayerDamage;
-import nl.naxanria.showdown.events.PlayerMove;
-import nl.naxanria.showdown.handlers.ArenaHandler;
-import nl.naxanria.showdown.handlers.EquipmentHandler;
-import nl.naxanria.showdown.handlers.LobbyHandler;
-import nl.naxanria.showdown.handlers.PlayerHandler;
-import no.runsafe.framework.RunsafePlugin;
+import nl.naxanria.showdown.command.*;
+import nl.naxanria.showdown.events.*;
+import nl.naxanria.showdown.handlers.*;
+import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.api.command.Command;
 
-public class Plugin extends RunsafePlugin
+public class Plugin extends RunsafeConfigurablePlugin
 {
 	@Override
 	protected void PluginSetup()
@@ -26,10 +21,17 @@ public class Plugin extends RunsafePlugin
 
 		this.addComponent(PlayerDamage.class);
 		this.addComponent(PlayerMove.class);
+		this.addComponent(PlayerDeath.class);
 
 		Command command = new Command("showdown", "showdown commands", null);
 		command.addSubCommand(this.getInstance(CommandSetArena.class));
 		command.addSubCommand(this.getInstance(CommandSetLobby.class));
+		command.addSubCommand(this.getInstance(CommandStart.class));
+		command.addSubCommand(this.getInstance(CommandStop.class));
+		command.addSubCommand(this.getInstance(CommandSetStartLocation.class));
+		command.addSubCommand(this.getInstance(CommandSetEndLocation.class));
+
+		this.addComponent(command);
 
 
 
