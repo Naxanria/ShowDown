@@ -80,7 +80,14 @@ public class PlayerHandler implements IConfigurationChanged
 
 	public void teleportAllToEnd() {
 		for (String player : inGame)
-			RunsafeServer.Instance.getPlayerExact(player).teleport(endLocation);
+		{
+			RunsafePlayer player_ = RunsafeServer.Instance.getPlayerExact(player);
+
+			player_.teleport(endLocation);
+			player_.setHealth(20f);
+			player_.setFoodLevel(20);
+			player_.setSaturation(20f);
+		}
 
 	}
 	@Override
