@@ -120,7 +120,7 @@ public class Core implements IConfigurationChanged, IPluginEnabled
 			playerHandler.teleportAllToStart();
 		}
 		else {
-			Util.sendMessage(players, "&3Not enough players");
+			announcementHandler.sendAnnouncement("&3Not enough players");
 			console.fine("Not enough players!");
 			countDownToStart();
 		}
