@@ -32,26 +32,9 @@ public class CommandSetAnnouncementArea extends PlayerCommand
 		if(selection == null)
 			return "&cPlease select an area.";
 
-		announcementAreaHandler.setAnnouncementArea(
-				new BoundingBox(
-						selection.getMinimumPoint().getX(),
-						selection.getMinimumPoint().getY(),
-						selection.getMinimumPoint().getZ(),
-						selection.getWidth(),
-						selection.getHeight(),
-						selection.getLength()
-				)
-		);
-
-		configuration.setConfigValue("announcement.x", selection.getMinimumPoint().getX());
-		configuration.setConfigValue("announcement.y", selection.getMinimumPoint().getY());
-		configuration.setConfigValue("announcement.z", selection.getMinimumPoint().getZ());
-		configuration.setConfigValue("announcement.w", selection.getWidth());
-		configuration.setConfigValue("announcement.h", selection.getHeight());
-		configuration.setConfigValue("announcement.l", selection.getLength());
-
-		configuration.save();
-
+		BoundingBox selBox = new BoundingBox(selection);
+		announcementAreaHandler.setAnnouncementArea(selBox);
+		selBox.saveConfig(configuration, "announcement");
 
 		return "&cSaved the announcement area.";
 	}

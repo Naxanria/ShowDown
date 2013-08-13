@@ -32,24 +32,11 @@ public class CommandSetLobby extends PlayerCommand
 		if(selection == null)
 			return "&cMake a selection first!";
 
-		double x = selection.getMinimumPoint().getX();
-		double y = selection.getMinimumPoint().getY();
-		double z = selection.getMinimumPoint().getZ();
-		double w = selection.getWidth();
-		double l = selection.getLength();
-		double h = selection.getHeight();
+		BoundingBox boundingBox = new BoundingBox(selection);
 
-		lobbyHandler.setLobby(
-				new BoundingBox(x, y, z, w, h, l)
-		);
+		lobbyHandler.setLobby(boundingBox);
 		lobbyHandler.setWorld(executor.getWorld().getName());
-
-		configuration.setConfigValue("lobby.x", x);
-		configuration.setConfigValue("lobby.y", y);
-		configuration.setConfigValue("lobby.z", z);
-		configuration.setConfigValue("lobby.w", w);
-		configuration.setConfigValue("lobby.h", h);
-		configuration.setConfigValue("lobby.l", l);
+		boundingBox.saveConfig(configuration, "lobby");
 		configuration.setConfigValue("lobby.world", executor.getWorld().getName());
 		configuration.save();
 

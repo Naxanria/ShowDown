@@ -33,24 +33,11 @@ public class CommandSetArena extends PlayerCommand
 		if(selection == null)
 			return "&cMake a selection first!";
 
-		double x = selection.getMinimumPoint().getX();
-		double y = selection.getMinimumPoint().getY();
-		double z = selection.getMinimumPoint().getZ();
-		double w = selection.getWidth();
-		double l = selection.getLength();
-		double h = selection.getHeight();
+		BoundingBox boundingBox = new BoundingBox(selection);
 
-		arenaHandler.setBoundingBox(
-				new BoundingBox(x, y, z, w, h, l)
-		);
+		arenaHandler.setBoundingBox(boundingBox);
 		arenaHandler.setWorld(executor.getWorld().getName());
-
-		configuration.setConfigValue("arena.x", x);
-		configuration.setConfigValue("arena.y", y);
-		configuration.setConfigValue("arena.z", z);
-		configuration.setConfigValue("arena.w", w);
-		configuration.setConfigValue("arena.h", h);
-		configuration.setConfigValue("arena.l", l);
+		boundingBox.saveConfig(configuration, "arena");
 		configuration.setConfigValue("arena.world", executor.getWorld().getName());
 		configuration.save();
 
