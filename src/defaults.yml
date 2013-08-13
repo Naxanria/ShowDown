@@ -14,6 +14,13 @@ lobby:
   w: 0
   h: 0
   l: 0
+announcement:
+  x: 0
+  y: 0
+  z: 0
+  w: 0
+  h: 0
+  l: 0
 start:
   x: 0
   y: 0

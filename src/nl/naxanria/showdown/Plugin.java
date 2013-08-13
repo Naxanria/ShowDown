@@ -16,6 +16,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 		this.addComponent(LobbyHandler.class);
 		this.addComponent(PlayerHandler.class);
 		this.addComponent(EquipmentHandler.class);
+		this.addComponent(AnnouncementAreaHandler.class);
 
 		this.addComponent(Core.class);
 
@@ -30,6 +31,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 		command.addSubCommand(this.getInstance(CommandStop.class));
 		command.addSubCommand(this.getInstance(CommandSetStartLocation.class));
 		command.addSubCommand(this.getInstance(CommandSetEndLocation.class));
+		command.addSubCommand(this.getInstance(CommandSetAnnouncementArea.class));
 
 		this.addComponent(command);
 

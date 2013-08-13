@@ -1,9 +1,6 @@
 package nl.naxanria.showdown;
 
-import nl.naxanria.showdown.handlers.ArenaHandler;
-import nl.naxanria.showdown.handlers.EquipmentHandler;
-import nl.naxanria.showdown.handlers.LobbyHandler;
-import nl.naxanria.showdown.handlers.PlayerHandler;
+import nl.naxanria.showdown.handlers.*;
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.IScheduler;
@@ -19,7 +16,8 @@ import java.util.List;
 public class Core implements IConfigurationChanged, IPluginEnabled
 {
 
-	public Core(ArenaHandler arenaHandler, LobbyHandler lobbyHandler, PlayerHandler playerHandler, IOutput console, IScheduler scheduler, EquipmentHandler equipmentHandler)
+	public Core(ArenaHandler arenaHandler, LobbyHandler lobbyHandler, PlayerHandler playerHandler, IOutput console, IScheduler scheduler, EquipmentHandler equipmentHandler,
+							AnnouncementAreaHandler announcementAreaHandler)
 	{
 		this.arenaHandler = arenaHandler;
 		this.lobbyHandler = lobbyHandler;
@@ -27,6 +25,8 @@ public class Core implements IConfigurationChanged, IPluginEnabled
 		this.console = console;
 		this.scheduler = scheduler;
 		this.equipmentHandler = equipmentHandler;
+		this.announcementHandler = announcementAreaHandler;
+
 	}
 
 
@@ -97,12 +97,12 @@ public class Core implements IConfigurationChanged, IPluginEnabled
 
 	private void startInToDamage(int i)
 	{
-		Util.sendMessage(playerHandler.getIngamePlayers(), String.format("&3The fight starts in %d!", i));
+		Util.sendMessage(playerHandler.getIngamePlayers(), String.format("&3The fight starts in &f%d!", i));
 	}
 
 	public void startInTime(int time)
 	{
-		Util.sendMessage(lobbyHandler.getLobbyPlayers(), String.format("&3Showdown will start in %d seconds!", time));
+		announcementHandler.sendAnnouncement(String.format("&3Showdown will start in &f%d&3 seconds!", time));
 	}
 
 	public void start()
@@ -182,6 +182,7 @@ public class Core implements IConfigurationChanged, IPluginEnabled
 	private final EquipmentHandler equipmentHandler;
 	private final IOutput console;
 	private final IScheduler scheduler;
+	private final AnnouncementAreaHandler announcementHandler;
 
 
 	private boolean countDownStarted = false;

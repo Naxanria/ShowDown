@@ -90,6 +90,7 @@ public class PlayerHandler implements IConfigurationChanged
 		}
 
 	}
+
 	@Override
 	public void OnConfigurationChanged(IConfiguration configuration)
 	{
@@ -109,6 +110,8 @@ public class PlayerHandler implements IConfigurationChanged
 			);
 
 	}
+
+
 	public void clear()
 	{
 		inGame.clear();
