@@ -23,6 +23,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 		this.addComponent(PlayerDamage.class);
 		this.addComponent(PlayerMove.class);
 		this.addComponent(PlayerDeath.class);
+		this.addComponent(PlayerDisconnectEvent.class);
 
 		Command command = new Command("showdown", "showdown commands", null);
 		command.addSubCommand(this.getInstance(CommandSetArena.class));
