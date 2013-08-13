@@ -26,9 +26,9 @@ public class CommandSetEndLocation extends PlayerCommand
 
 		playerHandler.setEndLocation(location);
 
-		configuration.setConfigValue("start.x", location.getX());
-		configuration.setConfigValue("start.y", location.getY());
-		configuration.setConfigValue("start.z", location.getZ());
+		configuration.setConfigValue("end.x", location.getX());
+		configuration.setConfigValue("end.y", location.getY());
+		configuration.setConfigValue("end.z", location.getZ());
 		configuration.save();
 
 		return "&3Set the location to: &f" + executor.getLocation().toString();
