@@ -8,6 +8,7 @@ import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
+import no.runsafe.framework.api.event.plugin.IPluginEnabled;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Core implements IConfigurationChanged
+public class Core implements IConfigurationChanged, IPluginEnabled
 {
 
 	public Core(ArenaHandler arenaHandler, LobbyHandler lobbyHandler, PlayerHandler playerHandler, IOutput console, IScheduler scheduler, EquipmentHandler equipmentHandler)
@@ -158,6 +159,12 @@ public class Core implements IConfigurationChanged
 
 	}
 
+	@Override
+	public void OnPluginEnabled()
+	{
+		countDownToStart();
+	}
+
 	public void winner()
 	{
 		RunsafeServer.Instance.broadcastMessage(String.format("%s &3was victorious in ShowDown!", playerHandler.getIngamePlayers().get(0).getPrettyName()));
@@ -166,6 +173,8 @@ public class Core implements IConfigurationChanged
 		stop();
 		countDownToStart();
 	}
+
+
 
 	private final ArenaHandler arenaHandler;
 	private final LobbyHandler lobbyHandler;
